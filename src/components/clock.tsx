@@ -4,10 +4,15 @@ import { TimeContext } from "./time-context";
 import { ColorContext } from "./color-context";
 
 const Clock: React.FC = () => {
-  const now = React.useContext(TimeContext);
-  const color = React.useContext(ColorContext);
-
-  return <AnalogClock time={now} color={color} />;
+  return (
+    <TimeContext.Consumer>
+      {now => (
+        <ColorContext.Consumer>
+          {color => <AnalogClock time={now} color={color} />}
+        </ColorContext.Consumer>
+      )}
+    </TimeContext.Consumer>
+  );
 };
 
 export default Clock;

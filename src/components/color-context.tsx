@@ -15,6 +15,7 @@ export const ColorProvider: React.FC<Props> = ({ children }) => {
         <select
           value={color}
           onChange={e => setColor(e.target.value as Colors)}
+          autoFocus
         >
           <option value="black">Black</option>
           <option value="blue">Blue</option>
