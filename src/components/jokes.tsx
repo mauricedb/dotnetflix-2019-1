@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Loading from "./loading";
-import jokesResource from "./jokes-resource";
 
 type Joke = { id: number; joke: string };
 
@@ -25,13 +24,11 @@ const useJokes = (url: string): JokesState => {
 };
 
 const Jokes: React.FC<JokesProps> = ({ url }) => {
-  // const { loading, jokes } = useJokes(url);
+  const { loading, jokes } = useJokes(url);
 
-  // if (loading) {
-  //   return <Loading />;
-  // }
-
-  const jokes = jokesResource.read(url) as Joke[];
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div>

@@ -1,28 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
+import AnalogClock from "./analog-clock";
+import { TimeContext } from "./time-context";
+import { ColorContext } from "./color-context";
 
-type ClockState = {
-  now: Date;
+const Clock: React.FC = () => {
+  const now = React.useContext(TimeContext);
+  const color = React.useContext(ColorContext);
+
+  return <AnalogClock time={now} color={color} />;
 };
-
-class Clock extends Component<{}, ClockState> {
-  handle = 0;
-  state = { now: new Date() };
-
-  componentDidMount() {
-    this.handle = window.setInterval(
-      () => this.setState({ now: new Date() }),
-      1000
-    );
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.handle);
-  }
-
-  render() {
-    const { now } = this.state;
-    return <div>The time is: {now.toLocaleTimeString()}</div>;
-  }
-}
 
 export default Clock;
