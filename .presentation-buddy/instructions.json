@@ -63,15 +63,10 @@
   },
 
   {
-    "type": "command",
-    "command": "workbench.action.files.save"
-  },
-  {
-    "skip": true,
     "type": "wait",
-    "delay": "manual"
+    "delay": "manual",
+    "save": true
   },
-
   {
     "type": "openFile",
     "path": "src/components/jokes.tsx"
@@ -96,13 +91,9 @@
     ]
   },
   {
-    "type": "command",
-    "command": "workbench.action.files.save"
-  },
-  {
-    "skip": true,
     "type": "wait",
-    "delay": "manual"
+    "delay": "manual",
+    "save": true
   },
 
   {
@@ -147,15 +138,11 @@
     ]
   },
   {
-    "type": "command",
-    "command": "workbench.action.files.save"
+    "type": "wait",
+    "delay": "manual",
+    "save": true
   },
 
-  {
-    "skip": true,
-    "type": "wait",
-    "delay": "manual"
-  },
   {
     "type": "openFile",
     "path": "src/components/jokes.tsx"
@@ -188,13 +175,9 @@
     "text": ["", "  const color = React.useContext(ColorContext);", ""]
   },
   {
-    "type": "command",
-    "command": "workbench.action.files.save"
-  },
-  {
-    "skip": true,
     "type": "wait",
-    "delay": "manual"
+    "delay": "manual",
+    "save": true
   },
 
   {
