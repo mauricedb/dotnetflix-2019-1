@@ -9,38 +9,39 @@ const initialState = { jokes: [] as Joke[], loading: true };
 type JokesProps = { url: string };
 type JokesState = typeof initialState;
 
-class Jokes extends Component<JokesProps, JokesState> {
-  state = initialState;
+const useJokes = (url: string): JokesState => {
+  const [{ jokes, loading }, setState] = React.useState(initialState);
 
-  async componentDidMount() {
-    const { url } = this.props;
-    const rsp = await fetch(url);
-    const jokes = await rsp.json();
-    this.setState({ jokes, loading: false });
+  React.useEffect(() => {
+    const fetchJokes = async () => {
+      const rsp = await fetch(url);
+      const jokes = await rsp.json();
+      setState({ jokes, loading: false });
+    };
+    fetchJokes();
+  }, [url]);
+
+  return { loading, jokes };
+};
+
+const Jokes: React.FC<JokesProps> = ({ url }) => {
+  const color = React.useContext(ColorContext);
+  const { loading, jokes } = useJokes(url);
+
+  if (loading) {
+    return <Loading />;
   }
 
-  render() {
-    const { jokes, loading } = this.state;
-
-    if (loading) {
-      return <Loading />;
-    }
-
-    return (
-      <ColorContext.Consumer>
-        {color => (
-          <div style={{ color }}>
-            <h2>Jon Skeet Jokes</h2>
-            <ul>
-              {jokes.map(item => (
-                <li key={item.id}>{item.joke}</li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </ColorContext.Consumer>
-    );
-  }
-}
+  return (
+    <div style={{ color }}>
+      <h2>Jon Skeet Jokes</h2>
+      <ul>
+        {jokes.map(item => (
+          <li key={item.id}>{item.joke}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default Jokes;
